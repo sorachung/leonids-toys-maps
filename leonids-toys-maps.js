@@ -1,3 +1,4 @@
+//array of toy objects
 const toys = [
   {
     id: 1,
@@ -34,14 +35,13 @@ const toys = [
   },
 ];
 
-
+//Map: key - a toy object; value - price
 const toyPrices = new Map();
-toyPrices.set(toys[0], 5.00);
+toyPrices.set(toys[0], 5.0);
 toyPrices.set(toys[1], 20.0);
 toyPrices.set(toys[2], 15.0);
 
-
-
+//more toy objects to add
 const rubiksCube = {
   id: 4,
   inStock: true,
@@ -67,37 +67,6 @@ const giantGiraffe = {
   battery: false,
 };
 
-// toys.push(rubiksCube);
-// toys.push(giantGiraffe);
-
-// for (const toy of toys) {
-//   console.log(`The ${toy.name} by ${toy.brand} is $${toy.price}`);
-// }
-
-// for (const toy of toys) {
-//   toy.price *= 1.05;
-//   console.log(`The ${toy.name} costs $${toy.price}`);
-// }
-
-const toyToFind = 2;
-
-// for (const toy of toys) {
-//   if (toy.id === toyToFind) {
-//     console.log(toy.name, toy);
-//   }
-// }
-
-function addToyToInventory(toyObject, price) {
-  const index = toys.length - 1
-  const maxId = toys[index].id;
-  const id = maxId + 1;
-
-  toyObject.id = id;
-
-  toys.push(toyObject);
-  toyPrices.set(toyObject, price)
-}
-
 const uno = {
   inStock: false,
   upc: 887961219722,
@@ -107,48 +76,59 @@ const uno = {
   brand: "Mattel",
   franchise: null,
   battery: false,
+};
+
+//add more toy objects to toys array and add toyObject-price pairing in toyPrices map
+function addToyToInventory(toyObject, price) {
+  const index = toys.length - 1;
+  const maxId = toys[index].id;
+  const id = maxId + 1;
+
+  toyObject.id = id;
+
+  toys.push(toyObject);
+  toyPrices.set(toyObject, price);
 }
+
+//adding 3 toy objects to toys array and updating toyPrices map
 addToyToInventory(rubiksCube, 10.99);
 addToyToInventory(giantGiraffe, 79.99);
 addToyToInventory(uno, 5.99);
-const toyNames = []
-toys.forEach(toy => toyNames.push(toy.name))
-console.log(toyNames)
 
+//log only the names of the all of the toys
+const toyNames = [];
+toys.forEach((toy) => toyNames.push(toy.name));
+console.log(toyNames);
 
+//find a specific toy by id
+const toyToFind = 2;
+const findToy = (id) => {
+  for (const toy of toys) {
+    if (toy.id === id) {
+      console.log(toy.name, toy);
+    }
+  }
+};
+
+findToy(toyToFind);
+
+//remove a toy object from toys array and its toy-price pairing from toyPrices Map
 const removeProduct = (id) => {
   for (let i = 0; i < toys.length; i++) {
-    if(toys[i].id === id) {
-      console.log(`removing ${toys[i].name}`)
-      toys.splice(i, 1)
+    if (toys[i].id === id) {
+      console.log(`removing ${toys[i].name}`);
+      toyPrices.delete(toys[i]);
+      toys.splice(i, 1);
       break;
     }
   }
-  
-}
+};
 
-// const removeProduct2 = (id) => {
-//   for (let i = 0; id >= toys[i].id; i++) {
-//     console.log(i)
-//     if(toys[i].id === id) {
-//       console.log(`removing ${toys[i].name}`)
-//       toys.splice(i, 1)
-//     }
-//   }
-  
-// }
-
+//testing removeProduct function
 removeProduct(2);
-// removeProduct2(2)
-console.log(toys)
+console.log(toys, toyPrices);
 
-// for (const toy of toys) {
-//   console.log(`${toy.name} costs $${toyPrices.get(toy)}`)
-// }
-
-
-
-
+//iterate over toyPrices map to log name and price
 for (let [toyObject, price] of toyPrices) {
-  console.log(`${toyObject.name} costs $${price}.`)
+  console.log(`${toyObject.name} costs $${price}.`);
 }
