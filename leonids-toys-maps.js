@@ -117,6 +117,7 @@ const removeProduct = (id) => {
   for (let i = 0; i < toys.length; i++) {
     if (toys[i].id === id) {
       console.log(`removing ${toys[i].name}`);
+      toyPrices.delete(toys[i]);
       toys.splice(i, 1);
       break;
     }
@@ -125,7 +126,7 @@ const removeProduct = (id) => {
 
 //testing removeProduct function
 removeProduct(2);
-console.log(toys);
+console.log(toys, toyPrices);
 
 //iterate over toyPrices map to log name and price
 for (let [toyObject, price] of toyPrices) {
