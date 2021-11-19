@@ -130,5 +130,5 @@ console.log(toys, toyPrices);
 
 //iterate over toyPrices map to log name and price
 for (let [toyObject, price] of toyPrices) {
-  console.log(`${toyObject.name} costs $${price}.`);
+  console.log(`${toyObject.name} costs $${price.toFixed(2)}.`);
 }
